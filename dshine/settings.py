@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
     'parler',
     'corsheaders',
+    'mathfilters',
 
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig',

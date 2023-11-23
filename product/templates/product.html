@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load range_tag %}
 {% load i18n %}
 {% block title %}
    <title>D-Shine - Product</title>
@@ -12,7 +13,12 @@
             <div class="container">
                 <ul class="breadcrumb fleft">
                     <li><a href="{% url 'home' %}">home</a></li>
-                    <li class="active">products</li>
+                    {% if request.GET.category %}
+                        <li><a href="{% url 'products' %}">products</a></li>
+                        <li>{{ request.GET.category }}</li>
+                    {% else %}
+                        <li class="active">products</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -20,33 +26,38 @@
     <section class="row contentRowPad greybg">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3 product">
-                    <div class="productInner row m0">
-                        <div class="row m0 imgHov">
-                            <img src="{% static 'images/product/pro1p/1.png' %}" alt="">
-                            <div class="row m0 hovArea">
-                                <div class="row m0 icons">
-                                    <ul class="list-inline">
-                                        <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                                    </ul>                                    
+                {% for product in products %}
+                    <div class="col-sm-3 product">
+                        <div class="productInner row m0">
+                            <div class="row m0 imgHov">
+                                <img src="{{ product.image.first.image.url }}" alt="{{ product.name }}" style="width: 263px; height: 332px;">
+                                <div class="row m0 hovArea">
+                                    <div class="row m0 icons">
+                                        <ul class="list-inline">
+                                            <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                        </ul>                                    
+                                    </div>
+                                    <div class="row m0 proType"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></div>
+                                    <div class="row m0 proRating">
+                                        {% for i in product.average_rating|get_range %}
+                                            <i class="fas fa-star"></i>
+                                        {% endfor %}
+                                    </div>
+                                    {% if product.in_sale %}
+                                        <div class="row m0 proPrice"><i class="fas fa-usd"></i><del>${{ product.price }}</del></div>
+                                        <div class="row m0 proPrice"><i class="fas fa-usd"></i>${{ product.final_price }}</div>
+                                    {% else %}
+                                        <div class="row m0 proPrice"><i class="fas fa-usd"></i>${{ product.price }}</div>
+                                    {% endif %}
                                 </div>
-                                <div class="row m0 proType"><a href="#">Baccarat</a></div>
-                                <div class="row m0 proRating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-o"></i>
-                                </div>
-                                <div class="row m0 proPrice"><i class="fas fa-usd"></i>455.00</div>
+                            </div>
+                            <div class="row m0 proName"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></div>
+                            <div class="row m0 proBuyBtn">
+                                <button class="addToCart btn">add to cart</button>
                             </div>
                         </div>
-                        <div class="row m0 proName"><a href="single-product.html">Maximus quam posuere</a></div>
-                        <div class="row m0 proBuyBtn">
-                            <button class="addToCart btn">add to cart</button>
-                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

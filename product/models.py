@@ -1,14 +1,20 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to='categories/')
+    slug = models.SlugField(max_length=100, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -38,6 +44,7 @@ class Manufacturer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True, null=True, blank=True)
     code = models.CharField(max_length=100)
     description = models.TextField()
     detail = models.TextField()
@@ -57,22 +64,29 @@ class Product(models.Model):
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
 
-    @property
-    def get_version(self):
-        for version in self.product_version.all():
-            return version.pk
-
     def save(self, *args, **kwargs):
         if self.in_sale:
             self.final_price = self.price - \
                 (self.price * self.sale_percent / 100)
+        self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return self.name
+    
+    def average_rating(self):
+        reviews = self.product_review.all()
+        total_ratings = sum(review.rating for review in reviews)
+        num_reviews = len(reviews)
+
+        if num_reviews > 0:
+            return round(total_ratings / num_reviews)
+        else:
+            return 0  
 
     def get_absolute_url(self):
-        return reverse('product_detail', kwargs={"pk": self.get_version})
+        return reverse('product_detail', kwargs={"slug": self.slug})
+
 
 class Review(models.Model):
     name = models.CharField(max_length=100)
