@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+   <title>D-Shine - Catalog</title>
+{% endblock %}
+
+{% block content %}
+      <section id="breadcrumbRow" class="row">
+         <h2>category</h2>
+         <div class="row pageTitle m0">
+            <div class="container">
+               <ul class="breadcrumb fleft">
+                  <li><a href="{% url 'home' %}">home</a></li>
+                  <li class="active">category</li>
+               </ul>
+            </div>
+         </div>
+      </section>
+      <section class="row contentRowPad">
+         <div class="container">
+            <div class="row" id="catalogs">
+               {% for category in categories %}
+                  <div class="fleft catalogBox">
+                     <div class="thumbnail">
+                        <div class="thumbnailInner row m0">
+                           <a href="#">
+                              <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                           </a>
+                        </div>
+                     </div>
+                     <div class="row m0 catalogType">{{ category.name }} <span></span></div>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+      </section>
+{% endblock %}
