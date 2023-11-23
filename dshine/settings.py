@@ -161,9 +161,9 @@ PARLER_LANGUAGES = {
     }
 }
 
-JAZZMIN_SETTINGS = {
-    "language_chooser": True,
-}
+# JAZZMIN_SETTINGS = {
+#     "language_chooser": True,
+# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
