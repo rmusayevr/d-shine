@@ -10,9 +10,8 @@
       <h2>About us</h2>
       <div class="row pageTitle m0">
          <div class="container">
-            <h4 class="fleft">About us</h4>
-            <ul class="breadcrumb fright">
-               <li><a href="index.html">home</a></li>
+            <ul class="breadcrumb fleft">
+               <li><a href="{% url 'home' %}">home</a></li>
                <li class="active">about us</li>
             </ul>
          </div>
@@ -85,120 +84,23 @@
             <h3>meet our team</h3>
          </div>
          <div class="row">
-            <div class="col-sm-3">
-               <div class="thumbnail">
-                  <img src="images/team/1.png" alt="...">
-                  <div class="caption">
-                     <h4>Rues jack</h4>
-                     <h5>Founder</h5>
-                     <ul class="list-inline row m0">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-3">
-               <div class="thumbnail">
-                  <img src="images/team/2.png" alt="...">
-                  <div class="caption">
-                     <h4>steve broad</h4>
-                     <h5>Co-Founder</h5>
-                     <ul class="list-inline row m0">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-3">
-               <div class="thumbnail">
-                  <img src="images/team/3.png" alt="...">
-                  <div class="caption">
-                     <h4>olius lisa</h4>
-                     <h5>Manager</h5>
-                     <ul class="list-inline row m0">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-3">
-               <div class="thumbnail">
-                  <img src="images/team/4.png" alt="...">
-                  <div class="caption">
-                     <h4>samuel burn</h4>
-                     <h5>Employee</h5>
-                     <ul class="list-inline row m0">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <section id="testimonialTabs" class="row contentRowPad">
-      <div class="container">
-         <div class="row sectionTitle">
-            <h3>some words from our customers</h3>
-            <h5>we satisfied more than 700 customers</h5>
-         </div>
-         <div class="row">
-            <div class="col-sm-6">
-               <div class="row m0 testimonialStyle2">
-                  <div class="testiInner">
-                     <p>“ Dshine is really excellent site for furnitures.I am very happy with the Dshine products and dedicated services from them. Dshine is really excellent site for furnitures. ”</p>
-                     <div class="row m0 clientInfo">
-                        <div class="thumbnail"><img src="images/testimonial/1.png" alt=""></div>
-                        <div class="clientName">smiker will</div>
+            {% for member in members %}
+               <div class="col-sm-3">
+                  <div class="thumbnail">
+                     <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                     <div class="caption">
+                        <h4>{{ member.name }}</h4>
+                        <h5>{{ member.designation }}</h5>
+                        <ul class="list-inline row m0">
+                           <li><a href="{{ member.facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                           <li><a href="{{ member.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                           <li><a href="{{ member.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                           <li><a href="mailto:{{ member.gmail }}"><i class="fab fa-google-plus"></i></a></li>
+                        </ul>
                      </div>
                   </div>
                </div>
-            </div>
-            <div class="col-sm-6">
-               <div class="row m0 testimonialStyle2">
-                  <div class="testiInner">
-                     <p>“ Dshine is really excellent site for furnitures.I am very happy with the Dshine products and dedicated services from them. Dshine is really excellent site for furnitures. ”</p>
-                     <div class="row m0 clientInfo">
-                        <div class="thumbnail"><img src="images/testimonial/5.png" alt=""></div>
-                        <div class="clientName">katrin ruos</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-6">
-               <div class="row m0 testimonialStyle2">
-                  <div class="testiInner">
-                     <p>“ Dshine is really excellent site for furnitures.I am very happy with the Dshine products and dedicated services from them. Dshine is really excellent site for furnitures. ”</p>
-                     <div class="row m0 clientInfo">
-                        <div class="thumbnail"><img src="images/testimonial/3.png" alt=""></div>
-                        <div class="clientName">dwayne johnson</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-6">
-               <div class="row m0 testimonialStyle2">
-                  <div class="testiInner">
-                     <p>“ Dshine is really excellent site for furnitures.I am very happy with the Dshine products and dedicated services from them. Dshine is really excellent site for furnitures. ”</p>
-                     <div class="row m0 clientInfo">
-                        <div class="thumbnail"><img src="images/testimonial/4.png" alt=""></div>
-                        <div class="clientName">fumiz roey</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
+            {% endfor %}
          </div>
       </div>
    </section>
@@ -210,12 +112,12 @@
          </div>
          <div class="row brands">
             <ul class="nav navbar-nav">
-               <li><a href="#"><img src="images/clients/1.png" alt=""></a></li>
-               <li><a href="#"><img src="images/clients/2.png" alt=""></a></li>
-               <li><a href="#"><img src="images/clients/3.png" alt=""></a></li>
-               <li><a href="#"><img src="images/clients/4.png" alt=""></a></li>
-               <li><a href="#"><img src="images/clients/5.png" alt=""></a></li>
-               <li><a href="#"><img src="images/clients/2.png" alt=""></a></li>
+               <li><a href="#"><img src="{% static 'images/clients/1.png' %}" alt="brand_logo"></a></li>
+               <li><a href="#"><img src="{% static 'images/clients/2.png' %}" alt="brand_logo"></a></li>
+               <li><a href="#"><img src="{% static 'images/clients/3.png' %}" alt="brand_logo"></a></li>
+               <li><a href="#"><img src="{% static 'images/clients/4.png' %}" alt="brand_logo"></a></li>
+               <li><a href="#"><img src="{% static 'images/clients/5.png' %}" alt="brand_logo"></a></li>
+               <li><a href="#"><img src="{% static 'images/clients/2.png' %}" alt="brand_logo"></a></li>
             </ul>
          </div>
       </div>

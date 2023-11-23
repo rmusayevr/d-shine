@@ -9,20 +9,19 @@
     <section id="breadcrumbRow" class="row">
         <h2>404</h2>
         <div class="row pageTitle m0">
-        <div class="container">
-            <h4 class="fleft">404</h4>
-            <ul class="breadcrumb fright">
-                <li><a href="index.html">home</a></li>
-                <li class="active">404</li>
-            </ul>
-        </div>
+            <div class="container">
+                <ul class="breadcrumb fleft">
+                    <li><a href="{% url 'home' %}">home</a></li>
+                    <li class="active">404</li>
+                </ul>
+            </div>
         </div>
     </section>
     <section id="page404" class="row contentRowPad">
         <div class="container">
-        <img src="images/404.png" alt="">
-        <h1>Error 404</h1>
-        <h2>Oops! page not found</h2>
+            <img src="{% static 'images/404.png' %}" alt="">
+            <h1>Error 404</h1>
+            <h2>Oops! page not found</h2>
         </div>
     </section>
 {% endblock %}
