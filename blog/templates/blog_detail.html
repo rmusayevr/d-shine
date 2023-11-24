@@ -27,7 +27,7 @@
                             <div class="fleft date">{{ blog.created_at|date:"d" }}<span>{{ blog.created_at|date:"b" }}</span></div>
                             <div class="fleft titlePart">
                                 <a href="{{ blog.get_absolute_url }}"><h4 class="blogTitle heading">{{ blog.title }}</h4></a>
-                                <p class="m0">By <a href="{% url 'blogs' %}?author={{ blog.author.slug }}">{{ blog.author.full_name }}</a><span>|</span><a href="#">5 Comments</a></p>
+                                <p class="m0">By <a href="{% url 'blogs' %}?author={{ blog.author.slug }}">{{ blog.author.full_name }}</a><span>|</span>{{ blog.blog_comment.all|length }} Comments</p>
                             </div>
                         </div>
                         <div class="row m0 featureImg">

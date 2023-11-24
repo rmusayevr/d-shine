@@ -1276,7 +1276,7 @@ button:hover {
 #header3 .navbar #mainNav .nav {
     position: relative;
     text-transform: uppercase;
-    width: 100%
+    /* width: 100% */
 }
 
 #header3 .navbar #mainNav .nav li a {
@@ -3743,12 +3743,13 @@ h6 {
 }
 
 .btn.btn-default {
-    border: 1px solid #333;
-    color: #333
+    border: 1px solid #dcdcdc;
+    color: #333;
+    background: #fff;
+
 }
 
 .btn.btn-default:hover {
-    border: 1px solid #333;
     background: #333;
     color: #fff
 }

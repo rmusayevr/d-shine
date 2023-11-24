@@ -6,29 +6,28 @@
 {% endblock %}
 
 {% block content %}
+
    <section id="breadcrumbRow" class="row">
       <h2>cart</h2>
       <div class="row pageTitle m0">
          <div class="container">
-            <h4 class="fleft">cart</h4>
-            <ul class="breadcrumb fright">
-               <li><a href="index.html">home</a></li>
+            <ul class="breadcrumb fleft">
+               <li><a href="{% url 'home' %}">home</a></li>
                <li class="active">cart</li>
             </ul>
          </div>
       </div>
    </section>
+
    <section class="row contentRowPad">
       <div class="container">
          <div class=" cartPage">
-            <h3 class="heading pageHeading">Shopping cart</h3>
             <div class="table-responsive cartTable row m0">
                <table class="table">
                   <thead>
                      <tr>
                         <th class="productImage">Product image</th>
                         <th class="productName">Product name</th>
-                        <th>edit</th>
                         <th>price</th>
                         <th>quantity</th>
                         <th>total</th>
@@ -53,7 +52,6 @@
                               </dl>
                            </div>
                         </td>
-                        <td><a href="#" class="edit"><i class="fas fa-edit"></i></a></td>
                         <td class="price"><del>$580</del>$420</td>
                         <td>
                            <div class="input-group spinner">
@@ -84,7 +82,6 @@
                               </dl>
                            </div>
                         </td>
-                        <td><a href="#" class="edit"><i class="fas fa-edit"></i></a></td>
                         <td class="price">$420</td>
                         <td>
                            <div class="input-group spinner">
@@ -103,7 +100,6 @@
                      <tr>
                         <td colspan="7">
                            <a href="#" class="btn btn-primary btn-lg">continue shopping</a>
-                           <a href="#" class="btn btn-default btn-lg fright">update shopping cart</a>
                            <a href="#" class="btn btn-default btn-lg fright">clear shopping cart</a>
                         </td>
                      </tr>
@@ -111,48 +107,7 @@
                </table>
             </div>
             <div class="row m0">
-               <div class="col-sm-4">
-                  <form class="row discountCupon m0" action="#" method="get">
-                     <h5 class="heading">Discount codes</h5>
-                     <p>Enter your coupon code</p>
-                     <input type="text" class="form-control" name="cuponCode" id="cuponCode">
-                     <input type="submit" class="btn btn-default btn-sm" value="apply code">
-                  </form>
-               </div>
-               <div class="col-sm-4">
-                  <form class="row m0 shippingTax" action="#" method="get">
-                     <h5 class="heading">Estimate shipping and tax</h5>
-                     <p>Enter your destination to get a shipping estimate</p>
-                     <div class="form-group">
-                        <label for="country">Country*</label>
-                        <select class="selectpicker countrySelect">
-                           <option value="bd">Australia</option>
-                           <option value="us">United States</option>
-                           <option value="uk">United Kingdom</option>
-                        </select>
-                     </div>
-                     <div class="form-group">
-                        <label for="country">State/Province</label>
-                        <select class="selectpicker countrySelect">
-                           <option value="">Please select region, state or province</option>
-                           <option value="Australian Capital Territory">Australian Capital Territory</option>
-                           <option value="New South Wales">New South Wales</option>
-                           <option value="Northern Territory">Northern Territory</option>
-                           <option value="Queensland">Queensland</option>
-                           <option value="South Australia">South Australia</option>
-                           <option value="South Australia">Tasmania</option>
-                           <option value="South Australia">Victoria</option>
-                           <option value="South Australia">Western Australia</option>
-                        </select>
-                     </div>
-                     <div class="form-group">
-                        <label for="country">Zip/Postal Code</label>
-                        <input type="text" class="form-control">
-                     </div>
-                     <input type="submit" class="btn btn-default btn-sm" value="get a code">
-                  </form>
-               </div>
-               <div class="col-sm-4">
+               <div class="col-sm-12">
                   <div class="row m0 totalCheckout">
                      <div class="descList row m0">
                         <dl class="dl-horizontal">
@@ -162,12 +117,12 @@
                            <dd>$1260</dd>
                         </dl>
                      </div>
-                     <a href="#" class="btn btn-default btn-sm">Proceed to Checkout</a>
-                     <a href="#" class="link">Checkout with multiple addresses</a>
+                     <a href="{% url 'checkout' %}" class="btn btn-default btn-sm">Proceed to Checkout</a>
                   </div>
                </div>
             </div>
          </div>
       </div>
    </section>
+   
 {% endblock %}   
