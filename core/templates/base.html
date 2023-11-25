@@ -50,13 +50,13 @@
                                     {% if user.is_authenticated %}
                                         <li>
                                             <a href="{% url 'wishlist' %}">
-                                                <span class="wish"><i class="fas fa-heart"></i>3</span>
+                                                <span class="wish"><i class="fas fa-heart"></i>{{ user.user_wishlist.first.products.all|length }}</span>
                                                 <span>Wishlist</span>
                                             </a>
                                         </li>
                                         <li class="h_cart">
                                             <a href="{% url 'cart' %}">
-                                                <span class="wish"><i class="fas fa-gem"></i>2</span>
+                                                <span class="wish"><i class="fas fa-gem"></i>{{ user.user_basket_item.all|length }}</span>
                                                 <span>My cart</span>
                                             </a>
                                             <div class="hclist">
@@ -70,34 +70,22 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr class="alert" role="alert">
-                                                            <td class="productImage"><img src="{% static 'images/product/single/l1.png' %}" alt=""></td>
-                                                            <td class="productName">
-                                                                <h6 class="heading">Gold Plated Charm</h6>
-                                                                <div class="input-group spinner">
-                                                                    <input class="form-control" value="1" type="text">
-                                                                    <div class="input-group-btn-vertical">
-                                                                        <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                                                        <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                                                            </tr>
-                                                            <tr class="alert" role="alert">
-                                                            <td class="productImage"><img src="{% static 'images/product/single/l1.png' %}" alt=""></td>
-                                                            <td class="productName">
-                                                                <h6 class="heading">Zephyrr Stones</h6>
-                                                                <div class="input-group spinner">
-                                                                    <input class="form-control" value="1" type="text">
-                                                                    <div class="input-group-btn-vertical">
-                                                                        <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                                                        <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                                                            </tr>
+                                                            {% for product in user.user_basket_item.all %}
+                                                                <tr class="alert" role="alert">
+                                                                    <td class="productImage"><img src="{{ product.product.image.first.image.url }}" alt="{{ product.product.name }}" style="width: 102px; height: 102px;" ></td>
+                                                                    <td class="productName">
+                                                                        <h6 class="heading" style="font-weight: bolder;">{{ product.product.name }}</h6>
+                                                                        <div class="input-group spinner" style="height: max-content;">
+                                                                            <input class="form-control" value="{{ product.quantity }}" type="text">
+                                                                            <div class="input-group-btn-vertical">
+                                                                                <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
+                                                                                <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
+                                                                </tr>
+                                                            {% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>

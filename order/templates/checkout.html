@@ -34,27 +34,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Dining Table</td>
-                                        <td>$840</td>
-                                    </tr>
-                                    <tr>
-                                        <td>office furniture</td>
-                                        <td>$420</td>
-                                    </tr>
+                                    {% for product in products %}
+                                        <tr>
+                                            <td>{{ product.product.name }} x {{ product.quantity }}</td>
+                                            {% if product.product.in_sale %}
+                                                <td>${{ product.product.final_price }}</td>
+                                            {% else %}
+                                                <td>${{ product.product.price }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td>cart subtotal</td>
-                                        <td>$1260</td>
-                                    </tr>
-                                    <tr>
-                                        <td>shipping</td>
-                                        <td>Free Shipping</td>
-                                    </tr>
-                                    <tr>
                                         <td>order total price</td>
-                                        <td>$1260</td>
+                                        <td>${{ total }}</td>
                                     </tr>
                                 </tfoot>
                             </table>

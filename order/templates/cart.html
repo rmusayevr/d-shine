@@ -27,7 +27,7 @@
                   <thead>
                      <tr>
                         <th class="productImage">Product image</th>
-                        <th class="productName">Product name</th>
+                        <th class="productName">Product information</th>
                         <th>price</th>
                         <th>quantity</th>
                         <th>total</th>
@@ -35,91 +35,53 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr class="alert" role="alert">
-                        <td class="productImage"><img src="images/product/single/l1.png" alt=""></td>
-                        <td class="productName">
-                           <h6 class="heading">dining table</h6>
-                           <div class="row descList m0">
-                              <dl class="dl-horizontal">
-                                 <dt>manufacturer :</dt>
-                                 <dd>Tartaan & Co</dd>
-                                 <dt>product code :</dt>
-                                 <dd>Xuo15</dd>
-                                 <dt>color :</dt>
-                                 <dd>Black</dd>
-                                 <dt>size :</dt>
-                                 <dd>Queen</dd>
-                              </dl>
-                           </div>
-                        </td>
-                        <td class="price"><del>$580</del>$420</td>
-                        <td>
-                           <div class="input-group spinner">
-                              <input type="text" class="form-control" value="2">
-                              <div class="input-group-btn-vertical">
-                                 <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                 <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                     {% for product in products %}
+                        <tr class="alert" role="alert">
+                           <td class="productImage" style="vertical-align: middle;"><img src="{{ product.product.image.first.image.url }}" alt="{{ product.product.name }}"></td>
+                           <td class="productName" style="vertical-align: middle;">
+                              <div class="row descList m0">
+                                 <dl class="dl-horizontal">
+                                    <dt>product name :</dt>
+                                    <dd>{{ product.product.name }}</dd>
+                                    <dt>product code :</dt>
+                                    <dd>{{ product.product.code }}</dd>
+                                    <dt>category :</dt>
+                                    <dd>{{ product.product.category.name }}</dd>
+                                    <dt>manufacturer :</dt>
+                                    <dd>{{ product.product.manufacturer.name }}</dd>
+                                 </dl>
                               </div>
-                           </div>
-                        </td>
-                        <td class="price">$840</td>
-                        <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                     </tr>
-                     <tr class="alert" role="alert">
-                        <td><img src="images/product/single/l3.png" alt=""></td>
-                        <td>
-                           <h6 class="heading">office furnitures</h6>
-                           <div class="row descList m0">
-                              <dl class="dl-horizontal">
-                                 <dt>manufacturer :</dt>
-                                 <dd>Tartaan & Co</dd>
-                                 <dt>product code :</dt>
-                                 <dd>Xuo15</dd>
-                                 <dt>color :</dt>
-                                 <dd>Black</dd>
-                                 <dt>size :</dt>
-                                 <dd>Queen</dd>
-                              </dl>
-                           </div>
-                        </td>
-                        <td class="price">$420</td>
-                        <td>
-                           <div class="input-group spinner">
-                              <input type="text" class="form-control" value="1">
-                              <div class="input-group-btn-vertical">
-                                 <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                 <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                           </td>
+                           {% if product.product.in_sale %}
+                              <td class="price" style="vertical-align: middle;"><del>${{ product.product.price }}</del>${{ product.product.final_price }}</td>
+                           {% else %}
+                              <td class="price" style="vertical-align: middle;">${{ product.product.price }}</td>
+                           {% endif %}
+                           <td style="vertical-align: middle;">
+                              <div class="input-group spinner" style="height: max-content;">
+                                 <input type="text" class="form-control" value="{{ product.quantity }}">
+                                 <div class="input-group-btn-vertical">
+                                    <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
+                                    <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                                 </div>
                               </div>
-                           </div>
-                        </td>
-                        <td class="price">$420</td>
-                        <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                     </tr>
+                           </td>
+                           <td class="price" style="vertical-align: middle;">${{ product.get_subtotal }}</td>
+                           <td style="vertical-align: middle;"><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
+                        </tr>
+                     {% endfor %}
                   </tbody>
                   <tfoot>
                      <tr>
                         <td colspan="7">
-                           <a href="#" class="btn btn-primary btn-lg">continue shopping</a>
-                           <a href="#" class="btn btn-default btn-lg fright">clear shopping cart</a>
+                           <a href="{% url 'products' %}" class="btn btn-primary btn-lg">continue shopping</a>
+                           <a href="#" class="btn btn-default btn-lg">clear shopping cart</a>
+                           <a href="{% url 'checkout' %}" class="btn btn-default btn-lg fright">Proceed to Checkout</a>
+                           <p class="fright" style="font-size: larger; margin-top: 20px;">Total Price : <span class="price" style="font-weight: bolder;">${{ total }}</span></p>
                         </td>
                      </tr>
                   </tfoot>
                </table>
-            </div>
-            <div class="row m0">
-               <div class="col-sm-12">
-                  <div class="row m0 totalCheckout">
-                     <div class="descList row m0">
-                        <dl class="dl-horizontal">
-                           <dt>Subtotal</dt>
-                           <dd>$1260</dd>
-                           <dt class="gt">Grand Total</dt>
-                           <dd>$1260</dd>
-                        </dl>
-                     </div>
-                     <a href="{% url 'checkout' %}" class="btn btn-default btn-sm">Proceed to Checkout</a>
-                  </div>
-               </div>
             </div>
          </div>
       </div>
