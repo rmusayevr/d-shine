@@ -47,63 +47,80 @@
                         <div class="col-sm-12">
                             <div class="fright wishlistCompare">
                                 <ul class="nav">
-                                    <li>
-                                        <a href="{% url 'wishlist' %}">
-                                            <span class="wish"><i class="fas fa-heart"></i>3</span>
-                                            <span>Wishlist</span>
-                                        </a>
-                                    </li>
-                                    <li class="h_cart">
-                                        <a href="{% url 'cart' %}">
-                                            <span class="wish"><i class="fas fa-gem"></i>2</span>
-                                            <span>My cart</span>
-                                        </a>
-                                        <div class="hclist">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                        <th class="productImage">Product image</th>
-                                                        <th class="productName">Product name</th>
-                                                        <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr class="alert" role="alert">
-                                                        <td class="productImage"><img src="{% static 'images/product/single/l1.png' %}" alt=""></td>
-                                                        <td class="productName">
-                                                            <h6 class="heading">Gold Plated Charm</h6>
-                                                            <div class="input-group spinner">
-                                                                <input class="form-control" value="1" type="text">
-                                                                <div class="input-group-btn-vertical">
-                                                                    <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                                                    <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                                    {% if user.is_authenticated %}
+                                        <li>
+                                            <a href="{% url 'wishlist' %}">
+                                                <span class="wish"><i class="fas fa-heart"></i>3</span>
+                                                <span>Wishlist</span>
+                                            </a>
+                                        </li>
+                                        <li class="h_cart">
+                                            <a href="{% url 'cart' %}">
+                                                <span class="wish"><i class="fas fa-gem"></i>2</span>
+                                                <span>My cart</span>
+                                            </a>
+                                            <div class="hclist">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                            <th class="productImage">Product image</th>
+                                                            <th class="productName">Product name</th>
+                                                            <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="alert" role="alert">
+                                                            <td class="productImage"><img src="{% static 'images/product/single/l1.png' %}" alt=""></td>
+                                                            <td class="productName">
+                                                                <h6 class="heading">Gold Plated Charm</h6>
+                                                                <div class="input-group spinner">
+                                                                    <input class="form-control" value="1" type="text">
+                                                                    <div class="input-group-btn-vertical">
+                                                                        <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
+                                                                        <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                                                        </tr>
-                                                        <tr class="alert" role="alert">
-                                                        <td class="productImage"><img src="{% static 'images/product/single/l1.png' %}" alt=""></td>
-                                                        <td class="productName">
-                                                            <h6 class="heading">Zephyrr Stones</h6>
-                                                            <div class="input-group spinner">
-                                                                <input class="form-control" value="1" type="text">
-                                                                <div class="input-group-btn-vertical">
-                                                                    <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                                                    <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                                                            </td>
+                                                            <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
+                                                            </tr>
+                                                            <tr class="alert" role="alert">
+                                                            <td class="productImage"><img src="{% static 'images/product/single/l1.png' %}" alt=""></td>
+                                                            <td class="productName">
+                                                                <h6 class="heading">Zephyrr Stones</h6>
+                                                                <div class="input-group spinner">
+                                                                    <input class="form-control" value="1" type="text">
+                                                                    <div class="input-group-btn-vertical">
+                                                                        <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
+                                                                        <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                            </td>
+                                                            <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="offers_navbtn" ><a href="{% url 'register' %}">Register</a></li>
-                                    <li class="offers_navbtn" ><a href="{% url 'login' %}">Login</a></li>
+                                        </li>
+                                        <li class="offers_navbtn">
+                                            <a href="{% url 'logout' %}">
+                                                <span class="wish"><i class='fas fa-sign-out-alt' style='margin-top: -12px; margin-right: 0;'></i></span>
+                                                <span style="margin-top: -10px;">Logout</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="offers_navbtn" >
+                                            <a href="{% url 'register' %}">
+                                                Register
+                                            </a>
+                                        </li>
+                                        <li class="offers_navbtn" >
+                                            <a href="{% url 'login' %}">
+                                                Login
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
