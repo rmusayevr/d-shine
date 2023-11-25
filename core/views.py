@@ -7,14 +7,16 @@ from django.db.models import Avg
 
 def home(request):
     products = Product.objects.annotate(avg_rating=Avg('product_review__rating')).order_by('-avg_rating')[:4]
+    latest_products = Product.objects.all().order_by('-created_at')[:10]
     categories = Category.objects.all()
     blogs = Blog.objects.all().order_by('-created_at')[1:6]
     last_blog = Blog.objects.last()
     context = {
         'products': products,
+        'latest_products': latest_products,
         'categories': categories,
         'blogs': blogs,
-        'last_blog': last_blog
+        'last_blog': last_blog,
     }
     return render(request, 'index.html', context=context)
 

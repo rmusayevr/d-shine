@@ -128,7 +128,7 @@
                     <div class="row m0 flexslider" id="productImageSlider">
                         <ul class="slides">
                             {% for image in product.image.all %}
-                                <li><img src="{{ image.image.url }}" alt="{{ product.name }}"></li>
+                                <li><img src="{{ image.image.url }}" alt="{{ product.name }}" style="height: 500px;"></li>
                             {% endfor %}
                         </ul>
                     </div>

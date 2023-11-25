@@ -1,5 +1,11 @@
 {% load static %} 
 {% load i18n %} 
+{% url 'home' as home_url %}
+{% url 'about' as about_url %}
+{% url 'contact' as contact_url %}
+{% url 'blogs' as blogs_url %}
+{% url 'products' as products_url %}
+{% url 'categories' as categories_url %}
 <!DOCTYPE html>
 <html lang="en">   
 <head>
@@ -16,7 +22,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendors\owl.carousel\css\owl.carousel.min.css' %}">    
+    <link rel="stylesheet" href="{% static 'vendors/owl.carousel/css/owl.carousel.min.css' %}">    
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-select/css/bootstrap-select.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'vendors/flexslider/flexslider.css' %}" media="screen" />
     <link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap-rating/bootstrap-rating.css' %}" media="screen" />
@@ -125,18 +131,28 @@
                 </div>
                 <div class="collapse navbar-collapse row" id="mainNav">
                     <ul class="nav navbar-nav col-sm-7">
-                        <li class="active dropdown">
+                        <li class="{% if request.path == home_url %}active{% endif %} dropdown">
                             <a href="{% url 'home' %}" >Home</a>
                         </li>
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li class="dropdown">
+                        <li class="{% if request.path == about_url %}active{% endif %}">
+                            <a href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="{% if request.path == contact_url %}active{% endif %}">
+                            <a href="{% url 'contact' %}">Contact</a>
+                        </li>
+                        <li class="{% if request.path == blogs_url %}active{% endif %} dropdown">
                             <a href="{% url 'blogs' %}">Blogs</a>
                         </li>
-                        <li class="dropdown megaMenu">
+                        <li class="{% if request.path == products_url %}active{% endif %} dropdown">
                             <a href="{% url 'products' %}">Products</a>
                         </li>
-                        <li class="dropdown">
+                        <li class="{% if request.path == categories_url %}active{% endif %} dropdown">
                             <a href="{% url 'categories' %}">Categories</a>
+                            <ul class="dropdown-menu" role="menu">
+                                {% for category in navbar_categories %}
+                                    <li><a href="{% url 'products' %}?category={{category.slug}}">{{ category.name }}</a></li>
+                                {% endfor %}
+                             </ul>
                         </li>
                     </ul>
                     <div class="fright searchForm col-sm-5" style="padding-right: 0;">

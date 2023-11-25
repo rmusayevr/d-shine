@@ -81,52 +81,24 @@
       </div>
    </section>
 
-   <section id="shopFeatures_new">
-      <div class=" shopFeatures_new container">
-         <ul>
-            <li class="sf_first">
-               <img alt="featured image" class="img-responsive"  src="{% static 'images/feature/1.jpg' %}">
-               <div class="sf_box">
-                  <div class="sf_box_inner">
-                     <h2>free shipping</h2>
-                     <h3>on orders over $299</h3>
-                     <p>This offer is valid on all our store items</p>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <a href="{% url 'products' %}">
-                  <img alt="featured image" class="img-responsive"  src="{% static 'images/feature/2.jpg' %}">
-                  <div class="sf_box">
-                     <div class="sf_box_inner">
-                        <h3>shop & save</h3>
-                        <p>On all our store items</p>
-                     </div>
+   <section id="shopRings">
+      <div class="sectionTitle">
+         <h3>New arrivels</h3>
+         <h5>know more about our latest collection</h5>
+      </div>
+      <div class="d-carousel-cener owl-carousel">
+         {% for latest_product in latest_products %}
+            <div class="dc-inner">
+               <a href="{{ latest_product.get_absolute_url }}">
+                  <img alt="ring" src="{{ latest_product.image.first.image.url }}" style="height: 330px;" >
+                  <div class="dc-containt">
+                     <h2>{{ latest_product.name }}</h2>
+                     <p>{{ latest_product.category.name }}</p>
                   </div>
                </a>
-            </li>
-            <li>
-               <a href="{% url 'categories' %}">
-                  <img alt="featured image" class="img-responsive"  src="{% static 'images/feature/3.jpg' %}">
-                  <div class="sf_box">
-                     <div class="sf_box_inner">
-                        <h3>Product catalog</h3>
-                     </div>
-                  </div>
-               </a>
-            </li>
-            <li>
-               <a href="{% url 'products' %}">
-                  <img alt="featured image" class="img-responsive"  src="{% static 'images/feature/4.jpg' %}">
-                  <div class="sf_box">
-                     <div class="sf_box_inner">
-                        <h3>product list</h3>
-                        <p>Lorem ipsum dolor sit amet</p>
-                     </div>
-                  </div>
-               </a>
-            </li>
-         </ul>
+            </div>
+         {% endfor %}
+        
       </div>
    </section>
 
@@ -170,22 +142,28 @@
       </div>
    </section>
 
-   <section id="D-Shine" class="row contentRowPad">
+   <section id="featureCategory" class="row contentRowPad">
       <div class="container">
-         <div class="row sectionTitle">
-            <h3>this is D-shine</h3>
-            <h5>shop over our best categories</h5>
+         <div class="row m0 sectionTitle">
+            <h3>our featured categories</h3>
+            <h5>make easy shop with our categories</h5>
          </div>
-         <div class="row">
+         <div class="owl-carousel featureCats row m0">
             {% for category in categories %}
-               <div class="col-sm-4 product">
-                  <div class="productInner row m0">
-                     <div class="row m0 imgHov">
-                        <a href="{% url 'products' %}?category={{ category.slug }}">
-                           <img src="{{ category.image.url }}" alt="{{ category.name }}" style="width: 360px; height: 333px;">
-                        </a>
+               <div class="item">
+                  <div class="row m0 imgHov" style="width: 255px; height: 255px;">
+                     <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                     <div class="row m0 hovArea">
+                        <i class="fas fa-heart-o"></i><br>
+                        <h4>{{ category.product_category.all|length }} items</h4>
+                        <a href="{% url 'products' %}?category={{ category.slug }}">shop now</a>
                      </div>
-                     <div class="row m0 proName"><a href="{% url 'products' %}?category={{ category.slug }}">{{ category.name }}</a></div>
+                  </div>
+                  <div class="cat_h">
+                     <a href="{% url 'products' %}?category={{ category.slug }}">
+                        <h4>{{ category.name }}</h4>
+                        <span>See the Collection</span>
+                     </a>
                   </div>
                </div>
             {% endfor %}
