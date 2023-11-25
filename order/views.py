@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
-from django.views.generic import CreateView
-from order.models import Basket, BasketItem, Wishlist
+from order.models import Basket, Wishlist
 
 class CartView(LoginRequiredMixin, TemplateView):
     template_name = "cart.html"
