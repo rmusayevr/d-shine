@@ -8,7 +8,7 @@
 {% block content %}
 
    <section id="breadcrumbRow" class="row">
-      <h2>cart</h2>
+      <h2 id="table">cart</h2>
       <div class="row pageTitle m0">
          <div class="container">
             <ul class="breadcrumb fleft">
@@ -34,7 +34,7 @@
                         <th>remove</th>
                      </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="basket-products">
                      {% for product in products %}
                         <tr class="alert" role="alert">
                            <td class="productImage" style="vertical-align: middle;"><img src="{{ product.product.image.first.image.url }}" alt="{{ product.product.name }}"></td>
@@ -67,7 +67,7 @@
                               </div>
                            </td>
                            <td class="price" style="vertical-align: middle;">${{ product.get_subtotal }}</td>
-                           <td style="vertical-align: middle;"><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
+                           <td style="vertical-align: middle;"><button class="remove-basket" data-id="{{ product.product.id }}" style="background-color: #fd405e; border: none; color: white; padding: 12px 10px; border-radius: 5px;"><i class="far fa-trash-alt"></i></button></td>
                         </tr>
                      {% endfor %}
                   </tbody>
@@ -75,9 +75,9 @@
                      <tr>
                         <td colspan="7">
                            <a href="{% url 'products' %}" class="btn btn-primary btn-lg">continue shopping</a>
-                           <a href="#" class="btn btn-default btn-lg">clear shopping cart</a>
+                           <a href="#table" id="clear-basket" class="btn btn-default btn-lg">clear shopping cart</a>
                            <a href="{% url 'checkout' %}" class="btn btn-default btn-lg fright">Proceed to Checkout</a>
-                           <p class="fright" style="font-size: larger; margin-top: 20px;">Total Price : <span class="price" style="font-weight: bolder;">${{ total }}</span></p>
+                           <p class="fright" style="font-size: larger; margin-top: 20px;">Total Price : <span class="price" id="total-price" style="font-weight: bolder;">${{ total }}</span></p>
                         </td>
                      </tr>
                   </tfoot>
@@ -88,3 +88,7 @@
    </section>
    
 {% endblock %}   
+
+{% block js %}
+   <script src="{% static 'js/basket.js' %}"></script>
+{% endblock %}

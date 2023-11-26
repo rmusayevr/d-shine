@@ -13,8 +13,8 @@ class CartView(LoginRequiredMixin, TemplateView):
         if user_basket:
             all_products = user_basket.products.all()
             for product in all_products:
-                total += product.get_total()
-            context['total'] = total
+                total += product.get_subtotal()
+            context['total'] = user_basket.get_total()
             context['products'] = all_products
         return context
 

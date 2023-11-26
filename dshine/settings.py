@@ -49,10 +49,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'mathfilters',
 
+    'account.apps.AccountConfig',
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig',
     'product.apps.ProductConfig',
-    'account.apps.AccountConfig',
     'order.apps.OrderConfig',
 ]
 
@@ -69,10 +69,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'dshine.urls'
-
-AUTH_USER_MODEL = 'account.User'
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
@@ -104,16 +100,7 @@ DATABASES = {
     }
 }
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-}
-
+AUTH_USER_MODEL = 'account.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -132,6 +119,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 
 # Internationalization

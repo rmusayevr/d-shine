@@ -21,18 +21,11 @@ class BasketItem(models.Model):
 
     def __str__(self):
         return f"{self.user.full_name}'s basket item"
-    
-    def get_total(self):
-        if self.product.in_sale:
-            total = self.product.final_price*self.quantity
-        else:
-            total = self.product.price*self.quantity
-        return total
 
     def get_subtotal(self):
         if self.product.in_sale:
-            return self.product.final_price*self.quantity
-        return self.product.price*self.quantity
+            return round(self.product.final_price*self.quantity, 2)
+        return round(self.product.price*self.quantity, 2)
 
     class Meta:
         verbose_name = "Basket Item"
@@ -46,6 +39,12 @@ class Basket(models.Model):
 
     def __str__(self):
         return f"{self.user.full_name}'s basket"
+    
+    def get_total(self):
+        total = 0
+        for basket_item in self.products.all():
+            total += basket_item.get_subtotal()
+        return round(total, 2)
 
     class Meta:
         verbose_name = "Basket"

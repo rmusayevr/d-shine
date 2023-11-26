@@ -104,6 +104,14 @@
             margin: 15px auto;
         }
 
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 {% endblock %}
 
@@ -182,21 +190,11 @@
                         </div>
                         <div class="row m0">
                             <ul class="list-inline wce">
-                                <li><a href="#"><i class="far fa-heart"></i>Add to Wishlist</a></li>
+                                <li style="cursor: pointer;" data-id="{{ product.pk }}" class="wishlist"><i class="far fa-heart"></i>Add to Wishlist</li>
                         </ul>
                         </div>
                         <div class="row m0 qtyAtc">
-                            <div class="fleft quantity">
-                                <div class="fleft">Qty <span>=</span></div>
-                                <div class="input-group spinner">
-                                    <input type="text" class="form-control" value="2">
-                                    <div class="input-group-btn-vertical">
-                                        <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                        <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="fleft btn btn-default"><img src="{% static 'images/icons/cart3.png' %}" alt=""> add to cart</button>
+                            <button class="fleft btn btn-default" id="basket" data-id="{{ product.pk }}"><img src="{% static 'images/icons/cart3.png' %}" alt="basket icon"> add to cart</button>
                         </div>
                     </div>
                 </div>
@@ -212,7 +210,7 @@
                 </ul>
                 <div class="tab-content shortcodeTabContent">
                     <div role="tabpanel" class="tab-pane row m0 active" id="description">
-                        <div class="fleft img"><img class="img-responsive" src="images/product/10.png" alt=""></div>
+                        <div class="fleft img"><img class="img-responsive" src="{% static 'images/product/10.png' %}" alt=""></div>
                         <div class="fleft desc">
                             <h5 class="heading">Product Details</h5>
                             <p>{{ product.detail }}</p>
@@ -326,3 +324,7 @@
         </div>
     </section>
 {% endblock %}    
+
+{% block js %}
+    <script src="{% static 'js/basket.js' %}"></script>
+{% endblock %}

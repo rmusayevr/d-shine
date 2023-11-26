@@ -8,7 +8,7 @@
 {% block content %}
 
     <section id="breadcrumbRow" class="row">
-        <h2>wishlist</h2>
+        <h2 id="#table">wishlist</h2>
         <div class="row pageTitle m0">
             <div class="container">
                 <ul class="breadcrumb fleft">
@@ -33,7 +33,7 @@
                                 <th>add to basket</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="wishlist-products">
                             {% for product in products %}
                                 <tr class="alert" role="alert">
                                     <td class="productImage" style="vertical-align: middle;"><img src="{{ product.image.first.image.url }}" alt="{{ product.name }}"></td>
@@ -56,8 +56,8 @@
                                     {% else %}
                                         <td class="price" style="vertical-align: middle;">${{ product.price }}</td>
                                     {% endif %}
-                                    <td style="vertical-align: middle;"><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
-                                    <td style="vertical-align: middle;"><a href="#" class="edit"><i class="fas fa-shopping-basket"></i></a></td>
+                                    <td style="vertical-align: middle;"><button class="remove-wishlist" data-id="{{ product.id }}" style="background-color: #fd405e; border: none; color: white; padding: 12px; border-radius: 5px;"><i class="far fa-trash-alt"></i></button></td>
+                                    <td style="vertical-align: middle;"><button class="add-basket" data-id="{{ product.id }}" style="background-color: #fd405e; border: none; color: white; padding: 12px 10px; border-radius: 5px;"><i class="fas fa-shopping-basket"></i></button></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -65,7 +65,7 @@
                             <tr>
                                 <td colspan="7">
                                 <a href="{% url 'products' %}" class="btn btn-primary btn-lg">continue shopping</a>
-                                <a href="#" class="btn btn-default btn-lg fright">clear wishlist</a>
+                                <a href="#table" id="clear-wishlist" class="btn btn-default btn-lg fright">clear wishlist</a>
                                 </td>
                             </tr>
                         </tfoot>
@@ -76,3 +76,4 @@
     </section>
 
 {% endblock %}   
+

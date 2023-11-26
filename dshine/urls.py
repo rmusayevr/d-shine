@@ -28,6 +28,8 @@ urlpatterns = i18n_patterns(
     path('', include('product.urls')),
     path('', include('account.urls')),
     path('', include('order.urls')),
+    path('', include('product.api.urls')),
+    path('', include('order.api.urls')),
     prefix_default_language=False
 )
 

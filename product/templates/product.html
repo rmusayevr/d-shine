@@ -34,7 +34,7 @@
                                 <div class="row m0 hovArea">
                                     <div class="row m0 icons">
                                         <ul class="list-inline">
-                                            <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                            <li style="cursor: pointer;" class="wishlist" data-id="{{ product.id }}"><i class="fas fa-heart"></i></li>
                                         </ul>                                    
                                     </div>
                                     <div class="row m0 proType"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></div>
@@ -52,9 +52,6 @@
                                 </div>
                             </div>
                             <div class="row m0 proName"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></div>
-                            <div class="row m0 proBuyBtn">
-                                <button class="addToCart btn">add to cart</button>
-                            </div>
                         </div>
                     </div>
                 {% endfor %}

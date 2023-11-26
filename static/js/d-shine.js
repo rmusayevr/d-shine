@@ -95,42 +95,42 @@ $("#testiTab li").each(function(){
         });
     
 
-       $(function () { // wait for document ready
-                            // init controller
-                            var controller = new ScrollMagic.Controller();
+    //    $(function () { // wait for document ready
+    //                         // init controller
+    //                         var controller = new ScrollMagic.Controller();
 
-                            // show pin state
-                            function updateBox (e) {
-                                if (e.type == "enter") {
-                                    $("#pin p").text("Pinned.");
-                                } else {
-                                    $("#pin p").text("Unpinned.");
-                                }
-                            }
+    //                         // show pin state
+    //                         function updateBox (e) {
+    //                             if (e.type == "enter") {
+    //                                 $("#pin p").text("Pinned.");
+    //                             } else {
+    //                                 $("#pin p").text("Unpinned.");
+    //                             }
+    //                         }
 
-                            // build scenes
-                            new ScrollMagic.Scene({triggerElement: "#trigger", duration: 150})
-                                .setPin("#pin")
-                                .setClassToggle("#pin", "one")
-                                .on("enter leave", updateBox)
-                                .addIndicators() // add indicators (requires plugin)
-                                .addTo(controller);
+    //                         // build scenes
+    //                         new ScrollMagic.Scene({triggerElement: "#trigger", duration: 150})
+    //                             .setPin("#pin")
+    //                             .setClassToggle("#pin", "one")
+    //                             .on("enter leave", updateBox)
+    //                             .addIndicators() // add indicators (requires plugin)
+    //                             .addTo(controller);
 
-                                 new ScrollMagic.Scene({triggerElement: "#trigger", duration: 150})
-                                .setPin("#pin-2")
-                                .setClassToggle("#pin", "green")
-                                .on("enter leave", updateBox)
-                                .addIndicators() // add indicators (requires plugin)
-                                .addTo(controller);
+    //                              new ScrollMagic.Scene({triggerElement: "#trigger", duration: 150})
+    //                             .setPin("#pin-2")
+    //                             .setClassToggle("#pin", "green")
+    //                             .on("enter leave", updateBox)
+    //                             .addIndicators() // add indicators (requires plugin)
+    //                             .addTo(controller);
                            
-                        });
+    //                     });
     /*----------------------------------------------------*/
     /*  Count Up
     /*----------------------------------------------------*/
-    $('.counter').counterUp({
-        delay: 15,
-        time: 1500
-    });    
+    // $('.counter').counterUp({
+    //     delay: 15,
+    //     time: 1500
+    // });    
     
     /*----------------------------------------------------*/
     /*  Spinner
