@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from order.models import Wishlist, Basket
+from order.models import Wishlist, Basket, BasketItem
 from product.models import Product
 from .serializers import WishlistSerializer, BasketSerializer
 
@@ -58,7 +58,7 @@ class WishlistAPIView(APIView):
 class BasketAPIView(APIView):
     queryset = Basket.objects.all()
     serializer_class = BasketSerializer
-    http_method_names = ['get', 'post', 'delete']
+    http_method_names = ['get', 'post', 'patch', 'delete']
 
     def get(self, request, *args, **kwargs):
         basket = Basket.objects.filter(user=self.request.user).first()
@@ -86,6 +86,23 @@ class BasketAPIView(APIView):
             message = {'success': True,
                        'message': 'Product added to your basket.'}
             return Response(message, status=status.HTTP_201_CREATED)
+        
+    def patch(self, request, *args, **kwargs):
+        ProductDOWN = request.data.get('productDown')
+        ProductUP = request.data.get('productUp')
+        if ProductDOWN:
+            user_basket = BasketItem.objects.get(product=ProductDOWN, user = request.user)
+            user_basket.quantity -= 1
+            user_basket.save()
+            message = {'success': True, 'message' : 'Product has been decreased.'}
+            return Response(message, status = status.HTTP_200_OK)
+        elif ProductUP:
+            user_basket = BasketItem.objects.get(product=ProductUP, user = request.user)
+            user_basket.quantity += 1
+            user_basket.save()
+            message = {'success': True, 'message' : 'Product has been increased.'}
+            return Response(message, status = status.HTTP_200_OK)
+        
 
     def delete(self, request, *args, **kwargs):
         product_pk = request.data.get('product')

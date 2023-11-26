@@ -27,7 +27,6 @@ if (document.querySelector('#basket')) {
                 })
         })
     }
-
     getBasket()
 }
 
@@ -127,3 +126,73 @@ if (document.getElementById('clear-basket')) {
             })
     })
 }
+
+
+let total = document.querySelector("#total_price")
+
+let downButton = document.querySelectorAll("#stepDown")
+downButton.forEach(element => {
+    element.addEventListener("click", function () {
+        let qty = element.parentElement.querySelector('.product-quantity').value
+        let product_price = element.closest('.alert').querySelector('.product-subtotal').innerHTML
+        let total_price = parseFloat(product_price.replace('$', '')).toFixed(2)
+        let price = parseFloat(total_price*qty / (parseInt(qty)+1)).toFixed(2)
+        if (qty >= 1) {
+            fetch(`${location.origin}/api/basket/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                    'productDown': element.dataset.id,
+                })
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    fetch(`${location.origin}/api/basket/`).then(response => response.json()).then(data => {
+                        document.getElementById('total-price').innerHTML = `
+                        $${data.total.toFixed(2)}
+                        `
+                    })
+                    element.closest('.alert').querySelector('.product-subtotal').innerHTML = `$${price}`
+                }
+            })
+        }
+        if (qty == 1) {
+            let down = element.parentElement.querySelector('#stepDown')
+            down.setAttribute('disabled', '');
+        }
+    });
+});
+
+let upButton = document.querySelectorAll("#stepUp")
+upButton.forEach(element => {
+    element.addEventListener("click", function () {
+        let qty = element.parentElement.querySelector('.product-quantity').value
+        let product_price = element.closest('.alert').querySelector('.product-subtotal').innerHTML
+        let total_price = parseFloat(product_price.replace('$', '')).toFixed(2)
+        let price = parseFloat(total_price*qty / (parseInt(qty)-1)).toFixed(2)
+        fetch(`${location.origin}/api/basket/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                'productUp': element.dataset.id,
+            })
+        }).then(response => response.json()).then(data => {
+            if (data.success) {
+                fetch(`${location.origin}/api/basket/`).then(response => response.json()).then(data => {
+                    document.getElementById('total-price').innerHTML = `
+                        $${data.total.toFixed(2)}
+                    `
+                })
+                element.closest('.alert').querySelector('.product-subtotal').innerHTML = `$${price}`
+            }
+            let down = element.parentElement.querySelector('#stepDown')
+            down.removeAttribute('disabled')
+        })
+    });
+});
+
